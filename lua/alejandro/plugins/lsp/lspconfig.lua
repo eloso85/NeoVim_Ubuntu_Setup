@@ -4,7 +4,7 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    { "folke/lazydev.nvim", ft = "lua", opts = {} },
   },
   config = function()
     -- import lspconfig plugin
@@ -115,72 +115,31 @@ return {
         })
       end,
       ["ts_ls"] = function()
-  -- Configure JavaScript/TypeScript server
-  lspconfig["ts_ls"].setup({
-    capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      -- Optional: Additional configuration for TypeScript/JavaScript
-    end,
-  })
-end,       ["pyright"] = function()
-    -- Configure Python server
-    lspconfig["pyright"].setup({
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        -- Optional: Additional configuration
-      end,
-    })
-  end,
-      ["html"] = function()
-    -- Configure HTML server
-    lspconfig["html"].setup({
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        -- Optional: Additional configuration
-      end,
-    })
-  end,
-       ["cssls"] = function()
-    -- Configure CSS server
-    lspconfig["cssls"].setup({
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        -- Optional: Additional configuration
-      end,
-    })
-  end,
-       ["eslint"] = function()
-    -- Configure ESLint (for React/Next.js)
-    lspconfig["eslint"].setup({
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
-          callback = function()
-            vim.lsp.buf.format({ async = false })
-          end,
+        lspconfig["ts_ls"].setup({
+          capabilities = capabilities,
         })
       end,
-    })
-  end,
-      ["pylsp"] = function()
-  -- Configure Python server
-  lspconfig["pylsp"].setup({
-    capabilities = capabilities,
-    settings = {
-      pylsp = {
-        plugins = {
-          pylint = { enabled = true },
-          pyflakes = { enabled = true },
-          pycodestyle = { enabled = true },
-        },
-      },
-    },
-    on_attach = function(client, bufnr)
-      -- Optional: Additional Django-specific configuration
-    end,
-  })
-end,      ["lua_ls"] = function()
+      ["pyright"] = function()
+        lspconfig["pyright"].setup({
+          capabilities = capabilities,
+        })
+      end,
+      ["html"] = function()
+        lspconfig["html"].setup({
+          capabilities = capabilities,
+        })
+      end,
+      ["cssls"] = function()
+        lspconfig["cssls"].setup({
+          capabilities = capabilities,
+        })
+      end,
+      ["eslint"] = function()
+        lspconfig["eslint"].setup({
+          capabilities = capabilities,
+        })
+      end,
+      ["lua_ls"] = function()
         -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
           capabilities = capabilities,
